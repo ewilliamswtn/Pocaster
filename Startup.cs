@@ -76,6 +76,8 @@ namespace Podcaster
             app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
+            DbInitializer.Initialize(app.ApplicationServices);
+
 
             app.UseMvc(routes =>
             {
