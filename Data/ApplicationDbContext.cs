@@ -15,6 +15,16 @@ namespace Podcaster.Data
         {
         }
 
+        public DbSet<PodcastEpisode> PodcastEpisode { get; set; }
+
+        public DbSet<PodcastChannel> PodcastChannel { get; set; }
+
+        public DbSet<Reviews> Reviews { get; set; }
+
+        public DbSet<UserFavorites> UserFavorites { get; set; }
+
+        public DbSet<Tags> Tags { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
