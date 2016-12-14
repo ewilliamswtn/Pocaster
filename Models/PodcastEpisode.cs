@@ -27,8 +27,8 @@ namespace Podcaster.Models
         // public int UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
 
-        public PodcastChannel PodcastChannel { get; set; }
         public int PodcastChannelId { get; set; }
+        public PodcastChannel PodcastChannel { get; set; }
 
     }
 }

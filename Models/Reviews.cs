@@ -17,6 +17,7 @@ namespace Podcaster.Models
         // User who submitted the review
         public virtual ApplicationUser User { get; set; }
 
+        public int PodcastEpisodeId { get; set; }
         public PodcastEpisode PodcastEpisode { get; set; }
 
         // A rating put into words.  Should be more than "was good" (use Rating), and not only list topics discussed (use tags).  Should more be focused on the significance of the episode to the user
