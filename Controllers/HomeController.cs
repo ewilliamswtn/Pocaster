@@ -8,7 +8,11 @@ using Podcaster.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 
 namespace Podcaster.Controllers
 {
@@ -26,27 +30,30 @@ namespace Podcaster.Controllers
             EpisodeListAll model = new EpisodeListAll(context);
 
             // Set the properties of the view model
-            model.Episodes = await context.PodcastEpisode.ToListAsync(); 
+            model.Episodes = await context.PodcastEpisode
+            .Include(e => e.PodcastChannel)
+            // .Where(e.PodcastChannelId == e.PodcastChannelId)
+            .ToListAsync(); 
             return View(model);
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
+        // public IActionResult About()
+        // {
+        //     ViewData["Message"] = "Your application description page.";
 
-            return View();
-        }
+        //     return View();
+        // }
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
+        // public IActionResult Contact()
+        // {
+        //     ViewData["Message"] = "Your contact page.";
 
-            return View();
-        }
+        //     return View();
+        // }
 
-        public IActionResult Error()
-        {
-            return View();
-        }
+        // public IActionResult Error()
+        // {
+        //     return View();
+        // }
     }
 }

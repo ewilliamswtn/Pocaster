@@ -9,7 +9,7 @@ namespace Podcaster.ViewModels
   {
     private ApplicationDbContext context;
     public IEnumerable<PodcastEpisode> Episodes { get; set; }
-    
+    public IEnumerable<PodcastChannel> Channels { get; set; }
 
     public EpisodeListAll(ApplicationDbContext ctx) { }
   }

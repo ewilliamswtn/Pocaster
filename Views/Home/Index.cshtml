@@ -4,13 +4,26 @@
     ViewData["Title"] = "Podcast Episodes";
 }
 
-<h2 class="top-buffer">@ViewData["Title"]</h2>
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <h2 class="top-buffer">@ViewData["Title"]</h2>    
+    </div>
+</div>
 
 @foreach (var episode in Model.Episodes)
 {
     <div class="row">
-        <div class="col-md-7">
-                @Html.DisplayFor(modelItem => episode.EpisodeName)
+        <div class="col-xs-12">                
+                <strong>@Html.DisplayFor(modelItem => episode.PodcastChannel.ChannelName):&nbsp;</strong>
+                @Html.DisplayFor(modelItem => episode.EpisodeName)     
         </div>
+
+        <div class="col-xs-1 spacer"></div>
+
+        <span class="ratingWrapperWraper">
+            <span class="ratingWrapper">
+                <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+            </span>
+        </span>
     </div>
 }

@@ -48,3 +48,18 @@ textarea {
     display: none
   }
 }
+
+.ratingWrapperWrapper {
+    max-width: 100px;
+}
+
+.ratingWrapper {
+  color: goldenrod;
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+
+.ratingWrapper > i:hover:before,
+.ratingWrapper > i:hover ~ i:before {
+   content: "\f005";
+}
