@@ -5,12 +5,12 @@ using Podcaster.Data;
 namespace Podcaster.ViewModels
 {
 
-  public class EpisodeListAll
+  public class EpisodeListAllViewModel
   {
     private ApplicationDbContext context;
     public IEnumerable<PodcastEpisode> Episodes { get; set; }
     public IEnumerable<PodcastChannel> Channels { get; set; }
 
-    public EpisodeListAll(ApplicationDbContext ctx) { }
+    public EpisodeListAllViewModel(ApplicationDbContext ctx, ApplicationUser user) { }
   }
 }

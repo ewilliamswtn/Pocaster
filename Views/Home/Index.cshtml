@@ -1,4 +1,4 @@
-@model Podcaster.ViewModels.EpisodeListAll
+@model Podcaster.ViewModels.EpisodeListAllViewModel
 
 @{
     ViewData["Title"] = "Podcast Episodes";
@@ -12,17 +12,35 @@
 
 @foreach (var episode in Model.Episodes)
 {
-    <div class="row">
-        <div class="col-xs-12">                
-                <strong>@Html.DisplayFor(modelItem => episode.PodcastChannel.ChannelName):&nbsp;</strong>
-                @Html.DisplayFor(modelItem => episode.EpisodeName)     
+    <div class="row podcastWrapper">
+        <div class="col-xs-12 podcast">                
+                <span class="podcastName"><strong>@Html.DisplayFor(modelItem => episode.PodcastChannel.ChannelName):&nbsp;</strong>
+                @Html.DisplayFor(modelItem => episode.EpisodeName)</span>
         </div>
 
         <div class="col-xs-1 spacer"></div>
 
         <span class="ratingWrapperWraper">
             <span class="ratingWrapper">
-                <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+                <a asp-controller="Home" asp-action="Rate" asp-route-id="5">
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                </a>
+
+                <a asp-controller="HomeController" asp-action="Rate" asp-route-id="4">
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                </a>
+                
+                <a asp-controller="HomeController" asp-action="Rate" asp-route-id="3">
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                </a>
+
+                <a asp-controller="HomeController" asp-action="Rate" asp-route-id="2">
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                </a>
+
+                <a asp-controller="HomeController" asp-action="Rate" asp-route-id="1">
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                </a>
             </span>
         </span>
     </div>

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -18,16 +17,22 @@ namespace Podcaster.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private ApplicationDbContext context;
-        public HomeController(ApplicationDbContext ctx)
+
+        public HomeController(UserManager<ApplicationUser> userManager, ApplicationDbContext ctx)
         {
+            _userManager = userManager;
             context = ctx;
         }
-        
+    
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
         public async Task<IActionResult> Index()
         {
+            var user = await GetCurrentUserAsync();
             // Create new instance of the view model
-            EpisodeListAll model = new EpisodeListAll(context);
+            EpisodeListAllViewModel model = new EpisodeListAllViewModel(context, user);
 
             // Set the properties of the view model
             model.Episodes = await context.PodcastEpisode
@@ -36,6 +41,52 @@ namespace Podcaster.Controllers
             .ToListAsync(); 
             return View(model);
         }
+
+        
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Create()
+        {
+            var user = await GetCurrentUserAsync();
+            PodcastCreateViewModel model = new PodcastCreateViewModel(context, user);
+            return View(model); 
+        }
+    
+        [HttpPost]
+        public async Task<IActionResult> Create(PodcastEpisode podcastepisode)
+        {
+
+            // ModelState.Remove("podcastepisode.User");            
+            var user = await GetCurrentUserAsync();
+            // if (ModelState.IsValid)
+            // {
+            //     podcastepisode.User = user;
+
+            //     context.Add(podcastepisode);
+
+            //     await context.SaveChangesAsync();
+            //     return RedirectToAction("Index");
+            // }
+
+            PodcastCreateViewModel model = new PodcastCreateViewModel(context, user);
+            return View(model);            
+        }
+
+
+        public async Task<IActionResult> Rate([FromRoute]int rating)
+        {
+            var user = await GetCurrentUserAsync();
+            // Create new instance of the view model
+            EpisodeListAllViewModel model = new EpisodeListAllViewModel(context, user);
+
+            // Set the properties of the view model
+            model.Episodes = await context.PodcastEpisode
+            .Include(e => e.PodcastChannel)
+            // .Where(e.PodcastChannelId == e.PodcastChannelId)
+            .ToListAsync(); 
+            return View(model);
+        }
+
 
         // public IActionResult About()
         // {

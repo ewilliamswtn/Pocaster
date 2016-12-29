@@ -51,13 +51,36 @@ namespace Podcaster.Data
                       PodcastChannelId = channels.Single(s => s.ChannelName == "The Joe Rogan Experience").PodcastChannelId
                   },
                   new PodcastEpisode {
-                      EpisodeName = "Derek Sivers on Developing Confidence, Finding Happiness, and Saying “No” to Millions",
+                      EpisodeName = "#801 - Gary Johnson",
+                      PodcastChannelId = channels.Single(s => s.ChannelName == "The Joe Rogan Experience").PodcastChannelId
+                  },
+                  new PodcastEpisode {
+                      EpisodeName = "#763 - Action Bronson",
+                      PodcastChannelId = channels.Single(s => s.ChannelName == "The Joe Rogan Experience").PodcastChannelId
+                  },
+                  new PodcastEpisode {
+                      EpisodeName = "Episode 1: Kevin Rose",
+                      PodcastChannelId = channels.Single(s => s.ChannelName == "The Tim Ferriss Show").PodcastChannelId
+                  },
+                  new PodcastEpisode {
+                      EpisodeName = "Episode 2: Joshua Waitzkin",
+                      PodcastChannelId = channels.Single(s => s.ChannelName == "The Tim Ferriss Show").PodcastChannelId
+                  },
+                  new PodcastEpisode {
+                      EpisodeName = "Ep. 14: Sam Harris, PhD - Spirituality, Neuroscienece, Meditation, and More",
                       PodcastChannelId = channels.Single(s => s.ChannelName == "The Tim Ferriss Show").PodcastChannelId
                   },
                   new PodcastEpisode {
                       EpisodeName = "Show 56 - King of Kings",
                       PodcastChannelId = channels.Single(s => s.ChannelName == "Dan Carlin's Hardcore History").PodcastChannelId
-
+                  },
+                  new PodcastEpisode {
+                      EpisodeName = "Show 50 - Blueprint for Armageddon",
+                      PodcastChannelId = channels.Single(s => s.ChannelName == "Dan Carlin's Hardcore History").PodcastChannelId
+                  },
+                  new PodcastEpisode {
+                      EpisodeName = "Show 43 - Wrath of the Khans",
+                      PodcastChannelId = channels.Single(s => s.ChannelName == "Dan Carlin's Hardcore History").PodcastChannelId
                   }
               };
 
