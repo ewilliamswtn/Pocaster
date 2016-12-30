@@ -55,21 +55,22 @@ namespace Podcaster.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PodcastEpisode podcastepisode)
         {
+            //Ignore user from model state
+            ModelState.Remove("podcastepisode.User");
 
-            // ModelState.Remove("podcastepisode.User");            
+            //This creates a new variable to hold our current instance of the ActiveCustomer class and then sets the active customer's id to the CustomerId property on the product being created so that a valid model is sent to the database
             var user = await GetCurrentUserAsync();
-            // if (ModelState.IsValid)
-            // {
-            //     podcastepisode.User = user;
 
-            //     context.Add(podcastepisode);
-
-            //     await context.SaveChangesAsync();
-            //     return RedirectToAction("Index");
-            // }
+            if (ModelState.IsValid)
+            {
+                podcastepisode.User = user;
+                context.Add(podcastepisode);
+                await context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
 
             PodcastCreateViewModel model = new PodcastCreateViewModel(context, user);
-            return View(model);            
+            return View(model);
         }
 
 
