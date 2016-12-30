@@ -1,13 +1,16 @@
 @using Microsoft.AspNetCore.Identity
 @using Podcaster.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
 @if (SignInManager.IsSignedIn(User))
 {
+    
     <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
+            <li><a asp-area="" asp-controller="Home" asp-action="Create"><i class="fa  fa-plus-square fa-lg"></i></a></li>            
             <li>
                 <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
             </li>
