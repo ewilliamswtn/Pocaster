@@ -1,0 +1,30 @@
+@model Podcaster.ViewModels.ChannelCreateViewModel
+
+@{
+    ViewData["Title"] = "Add a new Podcast Channel";
+}
+
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <h2 class="top-buffer">@ViewData["Title"]</h2>    
+    </div>
+</div>
+
+<form asp-action="ChannelCreate">
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.LabelFor(model => model.PodcastChannel.ChannelName)
+                <input asp-for="@Model.PodcastChannel.ChannelName" class="form-control" />
+                <span asp-validation-for="@Model.PodcastChannel.ChannelName" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="ChannelCreate" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>

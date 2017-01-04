@@ -61,6 +61,16 @@ namespace Podcaster.Controllers
             //This creates a new variable to hold our current instance of the ActiveCustomer class and then sets the active customer's id to the CustomerId property on the product being created so that a valid model is sent to the database
             var user = await GetCurrentUserAsync();
 
+            if (podcastepisode.PodcastChannelId == 0)
+            {
+                return RedirectToAction("Create");
+            }
+
+            if (podcastepisode.PodcastChannelId == 1)
+            {
+                return RedirectToAction("ChannelCreate");
+            }
+
             if (ModelState.IsValid)
             {
                 podcastepisode.User = user;
@@ -73,6 +83,35 @@ namespace Podcaster.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> ChannelCreate()
+        {
+            var user = await GetCurrentUserAsync();
+            ChannelCreateViewModel model = new ChannelCreateViewModel(context, user);
+            return View(model); 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChannelCreate(PodcastChannel podcastchannel)
+        {
+            //Ignore user from model state
+            // ModelState.Remove("podcastchannel.User");
+
+            //This creates a new variable to hold our current instance of the ActiveCustomer class and then sets the active customer's id to the CustomerId property on the product being created so that a valid model is sent to the database
+            var user = await GetCurrentUserAsync();
+
+            if (ModelState.IsValid)
+            {
+                // podcastchannel.User = user;
+                context.Add(podcastchannel);
+                await context.SaveChangesAsync();
+                return RedirectToAction("Create");
+            }
+
+            ChannelCreateViewModel model = new ChannelCreateViewModel(context, user);
+            return View(model);
+        }
 
         public async Task<IActionResult> Rate([FromRoute]int rating)
         {
