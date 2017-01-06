@@ -3,13 +3,11 @@ using System.Linq;
 using Podcaster.Models;
 using Podcaster.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 
 namespace Podcaster.ViewModels
 {
 
-  public class PodcastCreateViewModel
+    public class PodcastCreateViewModel
   {
     private ApplicationDbContext context;
     public IEnumerable<PodcastEpisode> Episodes { get; set; }
@@ -29,7 +27,7 @@ namespace Podcaster.ViewModels
 
       this.PodcastChannelId.Insert(0, new SelectListItem
       {
-          Text = "--Choose category--",
+          Text = "--Choose a Podcast--",
           Value = "0"
       });
 

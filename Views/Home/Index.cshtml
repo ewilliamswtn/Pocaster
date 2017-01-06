@@ -15,7 +15,10 @@
     <div class="row podcastWrapper">
         <div class="col-xs-12 podcast">                
                 <span class="podcastName"><strong>@Html.DisplayFor(modelItem => episode.PodcastChannel.ChannelName):&nbsp;</strong>
-                @Html.DisplayFor(modelItem => episode.EpisodeName)</span>
+                @Html.DisplayFor(modelItem => episode.EpisodeName)</span><a asp-controller="Home" asp-action="TagCreate" asp-route-id="@episode.PodcastEpisodeId"><i class="fa fa-tags" aria-hidden="true"></i></a>
+        </div>
+
+        <div class="col-xs-12 tagsWrapper"> 
         </div>
 
         <div class="col-xs-1 spacer"></div>

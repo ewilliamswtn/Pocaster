@@ -1,0 +1,31 @@
+@model Podcaster.ViewModels.TagCreateViewModel
+
+@{
+    ViewData["Title"] = "Add Tags to the podcast";
+}
+
+@Html.DisplayFor(model => model.CurrentEpisode.EpisodeName)
+
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <h2 class="top-buffer">@ViewData["Title"]</h2>    
+    </div>
+</div>
+
+<form asp-action="TagCreate">
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            <div class="col-md-10">
+                <input asp-for="@Model.Tags.Tag" class="form-control" />
+                <span asp-validation-for="@Model.Tags.Tag" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Tag" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>

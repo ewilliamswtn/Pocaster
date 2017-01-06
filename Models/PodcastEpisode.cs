@@ -1,10 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Podcaster.Models
 {
@@ -19,7 +14,7 @@ namespace Podcaster.Models
         public string EpisodeName { get; set; }
 
         // Topics discussed, genre, etc; e.g., "Fitness", "Nutrition", "Politics", etc
-        public ICollection<Tags> Tags { get; set; }
+        public ICollection<Tags> TagsList { get; set; }
 
         public ICollection<Reviews> Reviews { get; set; }
 

@@ -1,25 +1,25 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Podcaster.Models;
 using Podcaster.Data;
 using Podcaster.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
 
 namespace Podcaster.Controllers
 {
+    // Home Controller Class
     public class HomeController : Controller
     {
+        // User Manager, used to get active user
         private readonly UserManager<ApplicationUser> _userManager;
+
+        // Databse Context
         private ApplicationDbContext context;
 
+        // Home Controller Method
         public HomeController(UserManager<ApplicationUser> userManager, ApplicationDbContext ctx)
         {
             _userManager = userManager;
@@ -28,6 +28,13 @@ namespace Podcaster.Controllers
     
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
+        // *****************************
+        // ***** View Constructors *****
+        // *****************************
+    
+        // ***** Index *****
+
+        // Index Method on Home Controller, creates instance of Index View
         public async Task<IActionResult> Index()
         {
             var user = await GetCurrentUserAsync();
@@ -42,7 +49,9 @@ namespace Podcaster.Controllers
             return View(model);
         }
 
-        
+        // ***** Create *****
+
+        // Create Method on Home Controller, creates instance of Create(podcast) View
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Create()
@@ -52,6 +61,7 @@ namespace Podcaster.Controllers
             return View(model); 
         }
     
+        // Create(Overload) Method on Home Controller, posts new podcast episode to database, then sends user back to Index View
         [HttpPost]
         public async Task<IActionResult> Create(PodcastEpisode podcastepisode)
         {
@@ -83,6 +93,8 @@ namespace Podcaster.Controllers
             return View(model);
         }
 
+        // ***** ChannelCreate *****
+
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> ChannelCreate()
@@ -112,6 +124,60 @@ namespace Podcaster.Controllers
             ChannelCreateViewModel model = new ChannelCreateViewModel(context, user);
             return View(model);
         }
+
+        // ***** Tag *****
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> TagCreate(int? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var episode = await context.PodcastEpisode
+                    .SingleOrDefaultAsync(m => m.PodcastEpisodeId == id);
+
+            if (episode == null)
+            {
+                return NotFound();
+            }
+
+
+            var user = await GetCurrentUserAsync();
+            TagCreateViewModel model = new TagCreateViewModel(context, user);
+            model.CurrentEpisode = episode;
+            return View(model); 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TagCreate(int id, Tags tag)
+        {
+            //Ignore user from model state
+            // ModelState.Remove("podcastchannel.User");
+
+            //This creates a new variable to hold our current instance of the ActiveCustomer class and then sets the active customer's id to the CustomerId property on the product being created so that a valid model is sent to the database
+            var user = await GetCurrentUserAsync();
+
+
+            if (ModelState.IsValid)
+            {
+                tag.Tag = "Test";
+                tag.PodcastEpisodeId = id;                
+                context.Add(tag);
+                await context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            TagCreateViewModel model = new TagCreateViewModel(context, user);
+
+            return View(model);
+        }
+
+        // ***** Description *****
+
+        // ***** Rate *****
 
         public async Task<IActionResult> Rate([FromRoute]int rating)
         {

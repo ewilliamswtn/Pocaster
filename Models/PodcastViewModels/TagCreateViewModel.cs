@@ -5,13 +5,16 @@ using Podcaster.Data;
 namespace Podcaster.ViewModels
 {
 
-    public class ChannelCreateViewModel
+    public class TagCreateViewModel
   {
     private ApplicationDbContext context;
     public PodcastChannel PodcastChannel { get; set; }
     public IEnumerable<PodcastEpisode> Episodes { get; set; }
     public IEnumerable<PodcastChannel> Channels { get; set; }
+     public PodcastEpisode CurrentEpisode { get; set; }
+    public Tags Tags { get; set; }
 
-    public ChannelCreateViewModel(ApplicationDbContext ctx, ApplicationUser user) { }
+
+    public TagCreateViewModel(ApplicationDbContext ctx, ApplicationUser user) { }
   }
 }

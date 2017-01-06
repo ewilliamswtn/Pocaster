@@ -15,7 +15,7 @@ namespace Podcaster.Models
         public int TagId { get; set; }
         public string Tag { get; set; }
         public int PodcastEpisodeId { get; set; }
-        public PodcastEpisode Episodes { get; set; }
+        public PodcastEpisode Episode { get; set; }
 
     }
 }
