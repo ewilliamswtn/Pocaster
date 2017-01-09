@@ -14,7 +14,7 @@ namespace Podcaster.Models
         public string EpisodeName { get; set; }
 
         // Topics discussed, genre, etc; e.g., "Fitness", "Nutrition", "Politics", etc
-        public ICollection<Tags> TagsList { get; set; }
+        public ICollection<Tags> EpisodeTags { get; set; }
 
         public ICollection<Reviews> Reviews { get; set; }
 

@@ -12,7 +12,7 @@ namespace Podcaster.ViewModels
     public IEnumerable<PodcastEpisode> Episodes { get; set; }
     public IEnumerable<PodcastChannel> Channels { get; set; }
      public PodcastEpisode CurrentEpisode { get; set; }
-    public Tags Tags { get; set; }
+    public Tags NewTag { get; set; }
 
 
     public TagCreateViewModel(ApplicationDbContext ctx, ApplicationUser user) { }

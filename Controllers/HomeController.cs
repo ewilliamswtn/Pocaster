@@ -46,6 +46,12 @@ namespace Podcaster.Controllers
             .Include(e => e.PodcastChannel)
             // .Where(e.PodcastChannelId == e.PodcastChannelId)
             .ToListAsync(); 
+
+            model.TagsList = await context.Tags
+            .Include(e => e.Episode)
+            // .Where(e.PodcastChannelId == e.PodcastChannelId)
+            .ToListAsync(); 
+
             return View(model);
         }
 
@@ -179,17 +185,33 @@ namespace Podcaster.Controllers
 
         // ***** Rate *****
 
-        public async Task<IActionResult> Rate([FromRoute]int rating)
+        [HttpGet]
+        public async Task<IActionResult> Review(int rating)
         {
             var user = await GetCurrentUserAsync();
-            // Create new instance of the view model
-            EpisodeListAllViewModel model = new EpisodeListAllViewModel(context, user);
+            PodcastReviewViewModel model = new PodcastReviewViewModel(context, user);
+            return View(model); 
+        }
 
-            // Set the properties of the view model
-            model.Episodes = await context.PodcastEpisode
-            .Include(e => e.PodcastChannel)
-            // .Where(e.PodcastChannelId == e.PodcastChannelId)
-            .ToListAsync(); 
+        [HttpPost]
+        public async Task<IActionResult> Review(Reviews review)
+        {
+            //Ignore user from model state
+            ModelState.Remove("review.User");
+
+            //This creates a new variable to hold our current instance of the ActiveCustomer class and then sets the active customer's id to the CustomerId property on the product being created so that a valid model is sent to the database
+            var user = await GetCurrentUserAsync();
+
+            if (ModelState.IsValid)
+            {
+                review.User = user;
+                review.PodcastEpisodeId = 4;
+                context.Add(review);
+                await context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            ChannelCreateViewModel model = new ChannelCreateViewModel(context, user);
             return View(model);
         }
 

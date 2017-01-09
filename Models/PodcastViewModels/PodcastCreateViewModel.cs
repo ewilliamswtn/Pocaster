@@ -27,13 +27,13 @@ namespace Podcaster.ViewModels
 
       this.PodcastChannelId.Insert(0, new SelectListItem
       {
-          Text = "--Choose a Podcast--",
+          Text = "-CHOOSE A PODCAST-",
           Value = "0"
       });
 
         this.PodcastChannelId.Insert(1, new SelectListItem
       {
-          Text = "--Add a new podcast channel--",
+          Text = "-ADD NEW-",
           Value = "1"
       });
     }

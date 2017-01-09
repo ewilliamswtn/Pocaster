@@ -1,12 +1,22 @@
 .navbar-inverse {
-    border-color: #9d9d9d;
+    /*color: #cc5500;*/
+    background-color: #080300 !important;
+}
+
+a.navbar-brand, a.navbar-inverse {
+    color: #aa00ff  !important;
+}
+
+a:hover {
+    text-decoration: none;
 }
 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background-color: #222;
-    color: white;
+    /*background-color: #ccc;*/
+    background: linear-gradient(to bottom, #fff, #eee);
+    color: black;
     font-family: 'Lato', sans-serif;
     font-size: 1.8em;
 }
@@ -70,7 +80,10 @@ textarea {
 }
 
 .podcastWrapper {
+    color: black;
+    background-color: transparent;
     margin-bottom: 20px;
+    border-bottom: #9d9d9d solid 1px;    
 }
 
 /*.podcastWrapper:nth-child(2n) {
@@ -81,27 +94,64 @@ textarea {
     padding: 5px;
 }
 
-.podcastName:hover {
+/*.podcastName:hover {
     border-radius: 7px;
     background-color: #333;
-}
+}*/
 
-.podcast:hover {
+/*.podcast:hover {
     cursor: pointer;
-}
+}*/
 
 .ratingWrapperWrapper {
     max-width: 100px;
 }
 
-.ratingWrapper {
+.fa-star-o:before {
   color: goldenrod;
   unicode-bidi: bidi-override;
   direction: rtl;
 }
 
-.ratingWrapper > i:hover:before,
-.ratingWrapper > i:hover ~ i:before {
+.fa-star-o:hover:before,
+.fa-star-o::hover ~ .fa-star-o::before {
    cursor: pointer;
    content: "\f005";
 }
+
+
+.fa-tags:before {
+    color: #aa00ff;
+}
+
+.tagWrapper {
+    margin-bottom: 20px;
+}
+
+.tagSpan:nth-child(n+3) {
+    border-left: 1px solid black;
+    padding-left: 5px;
+}
+
+.btn-default:hover {
+    background-color: black;
+    color: white;
+}
+
+.navbar-inverse .btn-link {
+    color: #fff;
+}
+
+.navbar-inverse .btn-link:hover {
+    color: #aa00ff;
+    text-decoration: none;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #fff;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #aa00ff;    
+}
+

@@ -1,7 +1,7 @@
 @model Podcaster.ViewModels.PodcastReviewViewModel
 
 @{
-    ViewData["Title"] = "Review this podcast";
+    ViewData["Title"] = "Rate this podcast";
 }
 
 <div class="row">
@@ -9,3 +9,30 @@
         <h2 class="top-buffer">@ViewData["Title"]</h2>    
     </div>
 </div>
+
+<form asp-action="Review">
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.LabelFor(model => model.Review.Rating)
+                <input asp-for="@Model.Review.Rating" class="form-control" />
+                <span asp-validation-for="@Model.Review.Rating" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.LabelFor(model => model.Review.Description)
+                <textarea asp-for="@Model.Review.Description" class="form-control"> </textarea>
+                <span asp-validation-for="@Model.Review.Description" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Rate" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
