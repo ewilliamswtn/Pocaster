@@ -12,3 +12,6 @@ Do you listen to too many podcasts? Have you accrued several hundred Favorites o
   
 - Each podcast episode can be tagged with topics, genres etc.
 - Utilize a search feature that will search all episodes based on the **Podcast Name**, the **Episode Name**, or any associated **Tags**
+
+## Technologies
+Podcaster is an ASP.NET Core MVC app using an SQLite database, and is written in C#. It also uses JavaScript and jQuery for the search feature, as well as Razor syntax for the web page views.
